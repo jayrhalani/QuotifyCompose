@@ -46,6 +46,14 @@ val Poppins = FontFamily(
 // ---------- Custom Poppins TextStyles ----------
 
 // Bold
+val Typography.Bold24: TextStyle
+    @Composable get() = TextStyle(
+        fontFamily = Poppins,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp,
+        lineHeight = 24.sp
+    )
+
 val Typography.Bold20: TextStyle
     @Composable get() = TextStyle(
         fontFamily = Poppins,

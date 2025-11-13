@@ -22,14 +22,17 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
@@ -40,10 +43,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import com.jayhalani.quotifycompose.ui.theme.Bold16
+import com.jayhalani.quotifycompose.ui.theme.Bold24
+import com.jayhalani.quotifycompose.ui.theme.Medium14
 import com.jayhalani.quotifycompose.ui.theme.Medium16
 import com.jayhalani.quotifycompose.ui.theme.Normal12
-import com.jayhalani.quotifycompose.ui.theme.Normal8
+import com.jayhalani.quotifycompose.ui.theme.Normal14
 
 @Preview(showBackground = true)
 @Composable
@@ -51,16 +55,18 @@ fun HomeScreen(modifier: Modifier = Modifier) {
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
-            .padding(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)
+            .padding(vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item {
             Text(
+                modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 4.dp),
                 text = "Explore",
-                style = MaterialTheme.typography.Bold16,
+                style = MaterialTheme.typography.Bold24,
             )
             Text(
+                modifier = Modifier.padding(horizontal = 12.dp),
                 text = "Awesome quotes from or community",
-                style = MaterialTheme.typography.Normal12,
+                style = MaterialTheme.typography.Medium14.copy(color = Color.Gray),
             )
         }
 
@@ -68,6 +74,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(horizontal = 12.dp)
                     .clip(RoundedCornerShape(16.dp))
                     .fillMaxHeight(0.25f),
             ) {
@@ -82,18 +89,14 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 
         item {
             SectionHeader(
-                startText = "Latest Quotes",
-                endText = "View All",
-                onNavigate = {
+                startText = "Latest Quotes", endText = "View All", onNavigate = {
                     // TODO: Add Navigation to Latest Quotes Screen
-                }
-            )
+                })
         }
 
         item {
             LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                contentPadding = PaddingValues(horizontal = 16.dp)
+                horizontalArrangement = Arrangement.spacedBy(12.dp), contentPadding = PaddingValues(horizontal = 16.dp)
             ) {
                 items(10) {
                     QuotesCard()
@@ -103,14 +106,78 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 
         item {
             SectionHeader(
-                startText = "Categories",
-                endText = "View All",
-                onNavigate = {
-                    // TODO: Add Navigation to Latest Quotes Screen
-                }
-            )
+                startText = "Categories", endText = "View All", onNavigate = {
+                    // TODO: Add Navigation to Categories Screen
+                })
         }
 
+        item {
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(12.dp), contentPadding = PaddingValues(horizontal = 16.dp)
+            ) {
+                items(10) {
+                    QuotesCategoryComponent()
+                }
+            }
+        }
+
+        item {
+            SectionHeader(
+                startText = "Trending Quotes", endText = "View All", onNavigate = {
+                    // TODO: Add Navigation to Trending Quotes Screen
+                })
+        }
+
+        item {
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(12.dp), contentPadding = PaddingValues(horizontal = 16.dp)
+            ) {
+                items(10) {
+                    QuotesCard()
+                }
+            }
+        }
+    }
+}
+
+
+@Composable
+fun QuotesCategoryComponent(modifier: Modifier = Modifier) {
+    Card(
+        modifier = modifier
+            .width(100.dp)
+            .clip(RoundedCornerShape(16.dp))
+            .clickable {},
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+    ) {
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .background(color = Color.Blue.copy(alpha = 0.1f))
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            Surface(
+                modifier = modifier.size(44.dp),
+                shape = CircleShape,
+                color = Color.Blue.copy(alpha = 0.5f)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Favorite,
+                    contentDescription = "Category Icon",
+                    modifier = Modifier
+                        .size(44.dp)
+                        .padding(8.dp),
+                    tint = Color.Blue
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = "Life", style = MaterialTheme.typography.Medium14
+            )
+        }
     }
 }
 
@@ -129,8 +196,7 @@ fun QuotesCard(modifier: Modifier = Modifier) {
                 .background(
                     brush = Brush.linearGradient(
                         colors = listOf(
-                            Color(0xFF1E40AF),
-                            Color(0xFF1E40AF).copy(alpha = 0.7f)
+                            Color.Blue, Color.Blue.copy(alpha = 0.4f)
                         ),
                     )
                 )
@@ -140,9 +206,7 @@ fun QuotesCard(modifier: Modifier = Modifier) {
                 CircleShapeComponent()
                 SpacerWeight1f()
                 Icon(
-                    Icons.Default.Share,
-                    contentDescription = "ic_share",
-                    tint = Color.White
+                    Icons.Default.Share, contentDescription = "ic_share", tint = Color.White
                 )
                 Spacer(Modifier.width(8.dp))
                 Icon(
@@ -153,21 +217,17 @@ fun QuotesCard(modifier: Modifier = Modifier) {
             }
             SpacerWeight1f()
             Text(
-                text = "Never forget those who helped you even before you even asked.",
-                style = MaterialTheme.typography.Normal12.copy(
+                text = "Be yourself; everyone else is already taken.",
+                style = MaterialTheme.typography.Normal14.copy(
                     Color.White,
-                    lineHeight = 16.sp,
+                    lineHeight = 20.sp,
                 ),
             )
             Spacer(Modifier.height(4.dp))
             Text(
-                text = "-ig-glossy-minds",
-                style = MaterialTheme.typography.Normal8.copy(
-                    Color.White,
-                    lineHeight = 16.sp,
-                    fontStyle = FontStyle.Italic
-                ),
-                modifier = Modifier.padding(4.dp)
+                text = "-Oscar Wilde", style = MaterialTheme.typography.Normal12.copy(
+                    Color.White, lineHeight = 16.sp, fontStyle = FontStyle.Italic
+                ), modifier = Modifier.padding(4.dp)
             )
         }
     }
@@ -188,8 +248,7 @@ fun CircleShapeComponent(modifier: Modifier = Modifier) {
     Surface(
         modifier = modifier
             .size(32.dp)
-            .clip(CircleShape),
-        color = Color.White.copy(alpha = 0.5f)
+            .clip(CircleShape), color = Color.White.copy(alpha = 0.5f)
     ) {
 
     }
@@ -197,13 +256,12 @@ fun CircleShapeComponent(modifier: Modifier = Modifier) {
 
 @Composable
 fun SectionHeader(
-    modifier: Modifier = Modifier,
-    startText: String,
-    endText: String,
-    onNavigate: () -> Unit = {}
+    modifier: Modifier = Modifier, startText: String, endText: String, onNavigate: () -> Unit = {}
 ) {
     Row(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 12.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
@@ -212,9 +270,6 @@ fun SectionHeader(
         )
         // Spacer(modifier = Modifier.weight(1f)) // alternate to arrangement for this scenario
         Text(
-            text = endText,
-            style = MaterialTheme.typography.Medium16,
-            modifier = Modifier.clickable { onNavigate() }
-        )
+            text = endText, style = MaterialTheme.typography.Medium16, modifier = Modifier.clickable { onNavigate() })
     }
 }
