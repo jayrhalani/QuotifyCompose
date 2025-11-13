@@ -1,3 +1,22 @@
-# Project exclude paths
-/.gradle/
-/app/build/
+# Gradle files
+.gradle/
+build/
+
+# Android Studio
+.idea/
+*.iml
+
+# Local configuration files
+local.properties
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Gradle wrapper files
+gradle/wrapper/gradle-wrapper.properties
+
+# Android-specific cache and generated files
+.android/
+.cxx/
