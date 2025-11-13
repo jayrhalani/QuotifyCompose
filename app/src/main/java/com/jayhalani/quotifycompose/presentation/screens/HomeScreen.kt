@@ -1,4 +1,4 @@
-package com.jayhalani.quotifycompose.ui.screens
+package com.jayhalani.quotifycompose.presentation.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -32,6 +32,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,19 +40,25 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.jayhalani.quotifycompose.data.QuoteCategoryData
+import com.jayhalani.quotifycompose.data.QuoteCategoryModel
+import com.jayhalani.quotifycompose.data.QuoteData
+import com.jayhalani.quotifycompose.data.QuoteModel
 import com.jayhalani.quotifycompose.ui.theme.Bold24
+import com.jayhalani.quotifycompose.ui.theme.Medium12
 import com.jayhalani.quotifycompose.ui.theme.Medium14
 import com.jayhalani.quotifycompose.ui.theme.Medium16
 import com.jayhalani.quotifycompose.ui.theme.Normal12
-import com.jayhalani.quotifycompose.ui.theme.Normal14
 
 @Preview(showBackground = true)
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
+
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -95,11 +102,15 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         }
 
         item {
+            val randomQuotes = remember {
+                QuoteData.getQuotes().shuffled().take(10)
+            }
+
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(12.dp), contentPadding = PaddingValues(horizontal = 16.dp)
             ) {
-                items(10) {
-                    QuotesCard()
+                items(randomQuotes.size) { index ->
+                    QuotesCard(quoteModel = randomQuotes[index])
                 }
             }
         }
@@ -112,11 +123,15 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         }
 
         item {
+            val categories = remember {
+                QuoteCategoryData.getCategories()
+            }
+
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(12.dp), contentPadding = PaddingValues(horizontal = 16.dp)
             ) {
-                items(10) {
-                    QuotesCategoryComponent()
+                items(categories.size) { index ->
+                    QuotesCategoryComponent(quoteCategory = categories[index])
                 }
             }
         }
@@ -129,11 +144,15 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         }
 
         item {
+            val randomQuotes = remember {
+                QuoteData.getQuotes().shuffled().take(10)
+            }
+
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(12.dp), contentPadding = PaddingValues(horizontal = 16.dp)
             ) {
-                items(10) {
-                    QuotesCard()
+                items(randomQuotes.size) { index ->
+                    QuotesCard(quoteModel = randomQuotes[index])
                 }
             }
         }
@@ -142,7 +161,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 
 
 @Composable
-fun QuotesCategoryComponent(modifier: Modifier = Modifier) {
+fun QuotesCategoryComponent(modifier: Modifier = Modifier, quoteCategory: QuoteCategoryModel) {
     Card(
         modifier = modifier
             .width(100.dp)
@@ -154,7 +173,7 @@ fun QuotesCategoryComponent(modifier: Modifier = Modifier) {
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .background(color = Color.Blue.copy(alpha = 0.1f))
+                .background(color = quoteCategory.color.copy(alpha = 0.2f))
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -162,28 +181,26 @@ fun QuotesCategoryComponent(modifier: Modifier = Modifier) {
             Surface(
                 modifier = modifier.size(44.dp),
                 shape = CircleShape,
-                color = Color.Blue.copy(alpha = 0.5f)
+                color = quoteCategory.color.copy(alpha = 0.5f)
             ) {
                 Icon(
-                    imageVector = Icons.Default.Favorite,
+                    imageVector = quoteCategory.icon,
                     contentDescription = "Category Icon",
                     modifier = Modifier
                         .size(44.dp)
                         .padding(8.dp),
-                    tint = Color.Blue
+                    tint = quoteCategory.color
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Life", style = MaterialTheme.typography.Medium14
+                text = quoteCategory.name, style = MaterialTheme.typography.Medium12
             )
         }
     }
 }
-
-@Preview(showBackground = true)
 @Composable
-fun QuotesCard(modifier: Modifier = Modifier) {
+fun QuotesCard(modifier: Modifier = Modifier, quoteModel: QuoteModel) {
     Card(
         modifier = modifier
             .width(200.dp)
@@ -217,15 +234,17 @@ fun QuotesCard(modifier: Modifier = Modifier) {
             }
             SpacerWeight1f()
             Text(
-                text = "Be yourself; everyone else is already taken.",
-                style = MaterialTheme.typography.Normal14.copy(
+                text = quoteModel.text,
+                maxLines = 5,
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.Medium16.copy(
                     Color.White,
                     lineHeight = 20.sp,
                 ),
             )
-            Spacer(Modifier.height(4.dp))
+            Spacer(Modifier.height(8.dp))
             Text(
-                text = "-Oscar Wilde", style = MaterialTheme.typography.Normal12.copy(
+                text = "-${quoteModel.author}", style = MaterialTheme.typography.Normal12.copy(
                     Color.White, lineHeight = 16.sp, fontStyle = FontStyle.Italic
                 ), modifier = Modifier.padding(4.dp)
             )
@@ -268,7 +287,7 @@ fun SectionHeader(
             text = startText,
             style = MaterialTheme.typography.Medium16,
         )
-        // Spacer(modifier = Modifier.weight(1f)) // alternate to arrangement for this scenario
+        // Spacer(modifier = Modifier.weight(1f)) -> alternate to arrangement for this scenario
         Text(
             text = endText, style = MaterialTheme.typography.Medium16, modifier = Modifier.clickable { onNavigate() })
     }
