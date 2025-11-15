@@ -3,14 +3,12 @@ package com.jayhalani.quotifycompose.presentation
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -37,16 +35,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
+import com.jayhalani.quotifycompose.data.BannerData
 import com.jayhalani.quotifycompose.data.QuoteCategoryData
 import com.jayhalani.quotifycompose.data.QuoteCategoryModel
 import com.jayhalani.quotifycompose.data.QuoteData
 import com.jayhalani.quotifycompose.data.QuoteModel
+import com.jayhalani.quotifycompose.presentation.components.BannerSlider
 import com.jayhalani.quotifycompose.ui.theme.Bold24
 import com.jayhalani.quotifycompose.ui.theme.Medium12
 import com.jayhalani.quotifycompose.ui.theme.Medium14
@@ -54,12 +52,13 @@ import com.jayhalani.quotifycompose.ui.theme.Medium16
 import com.jayhalani.quotifycompose.ui.theme.Normal12
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, onNavigateToExplore: (category: String?) -> Unit) {
+fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
 
     LazyColumn(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize()
-            .padding(vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)
+            .padding(vertical = 12.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item {
             Text(
@@ -75,20 +74,7 @@ fun HomeScreen(modifier: Modifier = Modifier, onNavigateToExplore: (category: St
         }
 
         item {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 12.dp)
-                    .clip(RoundedCornerShape(16.dp))
-                    .fillMaxHeight(0.25f),
-            ) {
-                AsyncImage(
-                    model = "https://i.pinimg.com/736x/1a/fd/3f/1afd3f3fd73871816c92cf7cdbbd449f.jpg",
-                    contentDescription = "Banner",
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
-                )
-            }
+            BannerSlider(BannerData.getBanners())
         }
 
         item {
