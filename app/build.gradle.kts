@@ -50,6 +50,9 @@ dependencies {
     // Compose Material Icons
     implementation(libs.androidx.compose.material.icons.extended)
 
+    // Compose Navigation
+    implementation(libs.androidx.navigation.compose)
+
     // Coil - for image loading
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)

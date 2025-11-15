@@ -1,4 +1,4 @@
-package com.jayhalani.quotifycompose.presentation.screens
+package com.jayhalani.quotifycompose.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,7 +22,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Card
@@ -41,7 +40,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
@@ -55,9 +53,8 @@ import com.jayhalani.quotifycompose.ui.theme.Medium14
 import com.jayhalani.quotifycompose.ui.theme.Medium16
 import com.jayhalani.quotifycompose.ui.theme.Normal12
 
-@Preview(showBackground = true)
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(modifier: Modifier = Modifier, onNavigateToExplore: (category: String?) -> Unit) {
 
     LazyColumn(
         modifier = modifier
@@ -97,7 +94,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         item {
             SectionHeader(
                 startText = "Latest Quotes", endText = "View All", onNavigate = {
-                    // TODO: Add Navigation to Latest Quotes Screen
+                    onNavigateToExplore(null)
                 })
         }
 
@@ -131,7 +128,11 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 horizontalArrangement = Arrangement.spacedBy(12.dp), contentPadding = PaddingValues(horizontal = 16.dp)
             ) {
                 items(categories.size) { index ->
-                    QuotesCategoryComponent(quoteCategory = categories[index])
+                    QuotesCategoryComponent(
+                        quoteCategory = categories[index],
+                        onNavigateToExplore = { selectedCategory ->
+                            onNavigateToExplore(selectedCategory)
+                        })
                 }
             }
         }
@@ -161,12 +162,18 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 
 
 @Composable
-fun QuotesCategoryComponent(modifier: Modifier = Modifier, quoteCategory: QuoteCategoryModel) {
+fun QuotesCategoryComponent(
+    modifier: Modifier = Modifier,
+    quoteCategory: QuoteCategoryModel,
+    onNavigateToExplore: (category: String?) -> Unit
+) {
     Card(
         modifier = modifier
             .width(100.dp)
             .clip(RoundedCornerShape(16.dp))
-            .clickable {},
+            .clickable {
+                onNavigateToExplore(quoteCategory.name)
+            },
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
@@ -199,6 +206,7 @@ fun QuotesCategoryComponent(modifier: Modifier = Modifier, quoteCategory: QuoteC
         }
     }
 }
+
 @Composable
 fun QuotesCard(modifier: Modifier = Modifier, quoteModel: QuoteModel) {
     Card(

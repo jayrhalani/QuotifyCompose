@@ -8,7 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.jayhalani.quotifycompose.presentation.screens.HomeScreen
+import androidx.navigation.compose.rememberNavController
+import com.jayhalani.quotifycompose.presentation.nav.AppNavGraph
 import com.jayhalani.quotifycompose.ui.theme.QuotifyComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -16,9 +17,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val navController = rememberNavController()
             QuotifyComposeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HomeScreen(modifier = Modifier.padding(innerPadding))
+                    AppNavGraph(
+                        modifier = Modifier.padding(innerPadding),
+                        navController = navController
+                    )
                 }
             }
         }
