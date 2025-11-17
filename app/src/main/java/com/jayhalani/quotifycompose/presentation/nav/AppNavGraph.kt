@@ -20,23 +20,45 @@ fun AppNavGraph(modifier: Modifier, navController: NavHostController) {
         composable(route = QuoteScreen.Home.route) {
             HomeScreen(
                 onNavigateToExplore = { category ->
-                    navController.navigate("${QuoteScreen.Explore.route}/$category")
+                    navController.navigate("${QuoteScreen.Explore.route}/$category?showBackButton=true")
                 },
             )
         }
+
+        // This is the route for the bottom navigation item
+        composable(route = QuoteScreen.Explore.route) {
+            ExploreScreen(
+                initialSelectedCategory = "All",
+                showBackButton = false,
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        // This is the route for navigating from HomeScreen
         composable(
-            route = "${QuoteScreen.Explore.route}/{category}",
+            route = "${QuoteScreen.Explore.route}/{category}?showBackButton={showBackButton}",
             arguments = listOf(
                 navArgument("category") {
                     type = NavType.StringType
                     nullable = true
-                })
+                },
+                // Add a new argument to control the back button
+                navArgument("showBackButton") {
+                    type = NavType.BoolType
+                    defaultValue = true
+                }
+            )
         ) { backstackEntry ->
             val category = backstackEntry.arguments?.getString("category")
-            ExploreScreen(category, onBack = {
-                navController.popBackStack()
-            })
+            val showBackButton = backstackEntry.arguments?.getBoolean("showBackButton") ?: true
+
+            ExploreScreen(
+                initialSelectedCategory = category,
+                showBackButton = showBackButton,
+                onBack = { navController.popBackStack() }
+            )
         }
+
         composable(route = QuoteScreen.Saved.route) {
             SavedScreen()
         }

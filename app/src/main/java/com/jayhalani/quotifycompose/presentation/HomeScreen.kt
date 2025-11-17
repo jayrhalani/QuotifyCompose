@@ -55,12 +55,11 @@ import com.jayhalani.quotifycompose.ui.theme.Normal12
 fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
 
     LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(vertical = 12.dp),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item {
+            Spacer(modifier = Modifier.padding(top = 12.dp))
             Text(
                 modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 4.dp),
                 text = "Explore",

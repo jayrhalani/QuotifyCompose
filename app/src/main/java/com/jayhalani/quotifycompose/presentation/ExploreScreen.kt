@@ -60,7 +60,7 @@ import com.jayhalani.quotifycompose.ui.theme.Medium14
 
 @Composable
 fun ExploreScreen(
-    initialSelectedCategory: String?, onBack: () -> Unit
+    initialSelectedCategory: String?, showBackButton: Boolean, onBack: () -> Unit
 ) {
     val categoryList = remember {
         listOf(
@@ -86,20 +86,21 @@ fun ExploreScreen(
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(vertical = 12.dp)
+        modifier = Modifier.fillMaxSize()
     ) {
 
         Row(
+            modifier = Modifier.padding(vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Spacer(Modifier.width(8.dp))
-            Icon(
-                modifier = Modifier.clickable(onClick = onBack),
-                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = "Back Navigation"
-            )
+            if (showBackButton) {
+                Spacer(Modifier.width(8.dp))
+                Icon(
+                    modifier = Modifier.clickable(onClick = onBack),
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Back Navigation"
+                )
+            }
             Spacer(Modifier.width(4.dp))
             Text(
                 modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 4.dp),
@@ -109,9 +110,7 @@ fun ExploreScreen(
         }
 
         LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(vertical = 12.dp),
+            modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             item {
