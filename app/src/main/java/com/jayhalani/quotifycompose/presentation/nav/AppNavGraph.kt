@@ -17,7 +17,7 @@ fun AppNavGraph(modifier: Modifier, navController: NavHostController) {
 
     NavHost(modifier = modifier, navController = navController, startDestination = QuoteScreen.Home.route) {
 
-        composable(QuoteScreen.Home.route) {
+        composable(route = QuoteScreen.Home.route) {
             HomeScreen(
                 onNavigateToExplore = { category ->
                     navController.navigate("${QuoteScreen.Explore.route}/$category")
@@ -25,7 +25,7 @@ fun AppNavGraph(modifier: Modifier, navController: NavHostController) {
             )
         }
         composable(
-            "${QuoteScreen.Explore.route}/{category}",
+            route = "${QuoteScreen.Explore.route}/{category}",
             arguments = listOf(
                 navArgument("category") {
                     type = NavType.StringType
@@ -33,9 +33,11 @@ fun AppNavGraph(modifier: Modifier, navController: NavHostController) {
                 })
         ) { backstackEntry ->
             val category = backstackEntry.arguments?.getString("category")
-            ExploreScreen(category)
+            ExploreScreen(category) { updated ->
+
+            }
         }
-        composable(QuoteScreen.Saved.route) {
+        composable(route = QuoteScreen.Saved.route) {
             SavedScreen()
         }
     }
