@@ -8,12 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.jayhalani.quotifycompose.presentation.QuoteScreen
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
     val items = listOf(
-        BottomNavItem.Home,
-        BottomNavItem.Explore,
+        QuoteScreen.Home,
+        QuoteScreen.Explore,
+        QuoteScreen.Saved,
     )
 
     NavigationBar {
