@@ -80,7 +80,7 @@ fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
         item {
             SectionHeader(
                 startText = "Latest Quotes", endText = "View All", onNavigate = {
-                    onNavigateToExplore(null)
+                    onNavigateToExplore("All")
                 })
         }
 
@@ -101,7 +101,7 @@ fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
         item {
             SectionHeader(
                 startText = "Categories", endText = "View All", onNavigate = {
-                    // TODO: Add Navigation to Categories Screen
+                    onNavigateToExplore("All")
                 })
         }
 
@@ -126,7 +126,7 @@ fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
         item {
             SectionHeader(
                 startText = "Trending Quotes", endText = "View All", onNavigate = {
-                    // TODO: Add Navigation to Trending Quotes Screen
+                    onNavigateToExplore("All")
                 })
         }
 
@@ -148,7 +148,7 @@ fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
 
 
 @Composable
-fun QuotesCategoryComponent(
+private fun QuotesCategoryComponent(
     modifier: Modifier = Modifier,
     quoteCategory: QuoteCategoryModel,
     onNavigateToExplore: (category: String?) -> Unit
@@ -158,7 +158,7 @@ fun QuotesCategoryComponent(
             .width(100.dp)
             .clip(RoundedCornerShape(16.dp))
             .clickable {
-                onNavigateToExplore(quoteCategory.name)
+                onNavigateToExplore(quoteCategory.category.name)
             },
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
@@ -194,7 +194,7 @@ fun QuotesCategoryComponent(
 }
 
 @Composable
-fun QuotesCard(modifier: Modifier = Modifier, quoteModel: QuoteModel) {
+private fun QuotesCard(modifier: Modifier = Modifier, quoteModel: QuoteModel) {
     Card(
         modifier = modifier
             .width(200.dp)
@@ -247,17 +247,17 @@ fun QuotesCard(modifier: Modifier = Modifier, quoteModel: QuoteModel) {
 }
 
 @Composable
-fun RowScope.SpacerWeight1f() {
+private fun RowScope.SpacerWeight1f() {
     Spacer(modifier = Modifier.weight(1f))
 }
 
 @Composable
-fun ColumnScope.SpacerWeight1f() {
+private fun ColumnScope.SpacerWeight1f() {
     Spacer(modifier = Modifier.weight(1f))
 }
 
 @Composable
-fun CircleShapeComponent(modifier: Modifier = Modifier) {
+private fun CircleShapeComponent(modifier: Modifier = Modifier) {
     Surface(
         modifier = modifier
             .size(32.dp)
@@ -268,7 +268,7 @@ fun CircleShapeComponent(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun SectionHeader(
+private fun SectionHeader(
     modifier: Modifier = Modifier, startText: String, endText: String, onNavigate: () -> Unit = {}
 ) {
     Row(

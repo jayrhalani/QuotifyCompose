@@ -33,9 +33,9 @@ fun AppNavGraph(modifier: Modifier, navController: NavHostController) {
                 })
         ) { backstackEntry ->
             val category = backstackEntry.arguments?.getString("category")
-            ExploreScreen(category) { updated ->
-
-            }
+            ExploreScreen(category, onBack = {
+                navController.popBackStack()
+            })
         }
         composable(route = QuoteScreen.Saved.route) {
             SavedScreen()

@@ -9,7 +9,7 @@ data class QuoteModel(
 )
 
 enum class QuoteCategory {
-    LIFE, SUCCESS, MOTIVATION, LOVE, WISDOM, HUMOR, COURAGE, LEADERSHIP, EDUCATION, PHILOSOPHY
+    ALL, LIFE, SUCCESS, MOTIVATION, LOVE, WISDOM, HUMOR, COURAGE, LEADERSHIP, EDUCATION, PHILOSOPHY
 }
 
 object QuoteData {
@@ -82,7 +82,12 @@ object QuoteData {
             "Vidal Sassoon",
             QuoteCategory.SUCCESS
         ),
-        QuoteModel(20, "The way to get started is to quit talking and begin doing.", "Walt Disney", QuoteCategory.SUCCESS),
+        QuoteModel(
+            20,
+            "The way to get started is to quit talking and begin doing.",
+            "Walt Disney",
+            QuoteCategory.SUCCESS
+        ),
         QuoteModel(
             21,
             "I find that the harder I work, the more luck I seem to have.",
