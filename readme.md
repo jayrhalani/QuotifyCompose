@@ -1,7 +1,7 @@
-# 💰 Quotify Compose App
+# Quotify Compose App
 Build a simple, clean Quotes App using Kotlin + Jetpack Compose that helps you practice UI
 
-## 📸 Screenshots
+## Screenshots
 
 |                                Home Screen                                |                                       Explore Screen                                       |
 |:------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------:|
