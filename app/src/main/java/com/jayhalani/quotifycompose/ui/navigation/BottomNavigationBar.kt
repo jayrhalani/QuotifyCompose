@@ -1,4 +1,4 @@
-package com.jayhalani.quotifycompose.presentation.nav
+package com.jayhalani.quotifycompose.ui.navigation
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.jayhalani.quotifycompose.presentation.QuoteScreen
+import com.jayhalani.quotifycompose.ui.screens.quote.QuoteScreen
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {

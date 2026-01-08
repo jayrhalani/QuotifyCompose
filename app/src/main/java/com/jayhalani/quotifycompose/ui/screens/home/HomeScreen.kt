@@ -1,4 +1,4 @@
-package com.jayhalani.quotifycompose.presentation
+package com.jayhalani.quotifycompose.ui.screens.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -44,7 +44,7 @@ import com.jayhalani.quotifycompose.data.QuoteCategoryData
 import com.jayhalani.quotifycompose.data.QuoteCategoryModel
 import com.jayhalani.quotifycompose.data.QuoteData
 import com.jayhalani.quotifycompose.data.QuoteModel
-import com.jayhalani.quotifycompose.presentation.components.BannerSlider
+import com.jayhalani.quotifycompose.ui.components.BannerSlider
 import com.jayhalani.quotifycompose.ui.theme.Bold24
 import com.jayhalani.quotifycompose.ui.theme.Medium12
 import com.jayhalani.quotifycompose.ui.theme.Medium14

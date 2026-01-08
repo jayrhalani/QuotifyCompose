@@ -1,4 +1,4 @@
-package com.jayhalani.quotifycompose.presentation
+package com.jayhalani.quotifycompose.ui.screens.explore
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background

@@ -9,8 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.jayhalani.quotifycompose.presentation.nav.BottomNavigationBar
-import com.jayhalani.quotifycompose.presentation.nav.AppNavGraph
+import com.jayhalani.quotifycompose.ui.navigation.BottomNavigationBar
+import com.jayhalani.quotifycompose.ui.navigation.AppNavGraph
 import com.jayhalani.quotifycompose.ui.theme.QuotifyComposeTheme
 
 class MainActivity : ComponentActivity() {

@@ -1,4 +1,4 @@
-package com.jayhalani.quotifycompose.presentation
+package com.jayhalani.quotifycompose.ui.screens.quote
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Explore

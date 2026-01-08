@@ -1,4 +1,4 @@
-package com.jayhalani.quotifycompose.presentation
+package com.jayhalani.quotifycompose.ui.screens.saved
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
