@@ -30,6 +30,7 @@ import com.jayhalani.quotifycompose.data.QuoteCategoryModel
 import com.jayhalani.quotifycompose.data.QuoteData
 import com.jayhalani.quotifycompose.ui.screens.explore.components.ExploreCategoryChipContainer
 import com.jayhalani.quotifycompose.ui.screens.explore.components.ExploreQuotesCard
+import com.jayhalani.quotifycompose.ui.theme.AppStrings
 import com.jayhalani.quotifycompose.ui.theme.Bold24
 
 @Composable
@@ -40,10 +41,11 @@ fun ExploreScreen(
         listOf(
             QuoteCategoryModel(
                 id = 0,
-                name = "All",
+                name = AppStrings.CATEGORY_ALL,
                 category = QuoteCategory.ALL,
                 icon = Icons.Default.Dashboard,
-                color = Color.Gray
+                color = Color.Gray,
+                contentDescription = AppStrings.CD_CAT_ALL
             )
         ) + QuoteCategoryData.getCategories()
     }
@@ -72,13 +74,13 @@ fun ExploreScreen(
                 Icon(
                     modifier = Modifier.clickable(onClick = onBack),
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Back Navigation"
+                    contentDescription = AppStrings.CD_NAV_BACK
                 )
             }
             Spacer(Modifier.width(4.dp))
             Text(
                 modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 4.dp),
-                text = "Categories",
+                text = AppStrings.TITLE_CATEGORIES,
                 style = MaterialTheme.typography.Bold24,
             )
         }

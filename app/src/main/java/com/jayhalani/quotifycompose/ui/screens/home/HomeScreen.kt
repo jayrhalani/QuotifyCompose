@@ -14,13 +14,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.jayhalani.quotifycompose.data.BannerData
 import com.jayhalani.quotifycompose.data.QuoteCategoryData
 import com.jayhalani.quotifycompose.data.QuoteData
-import com.jayhalani.quotifycompose.ui.screens.home.components.BannerSlider
+import com.jayhalani.quotifycompose.ui.screens.home.components.HomeBannerSlider
 import com.jayhalani.quotifycompose.ui.screens.home.components.HomeQuotesCard
 import com.jayhalani.quotifycompose.ui.screens.home.components.HomeQuotesCategory
 import com.jayhalani.quotifycompose.ui.screens.home.components.HomeSectionHeader
+import com.jayhalani.quotifycompose.ui.theme.AppStrings
 import com.jayhalani.quotifycompose.ui.theme.Bold24
 import com.jayhalani.quotifycompose.ui.theme.Medium14
 
@@ -28,30 +28,31 @@ import com.jayhalani.quotifycompose.ui.theme.Medium14
 fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
 
     LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item {
             Spacer(modifier = Modifier.padding(top = 12.dp))
             Text(
                 modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 4.dp),
-                text = "Explore",
+                text = AppStrings.TITLE_HOME,
                 style = MaterialTheme.typography.Bold24,
             )
             Text(
                 modifier = Modifier.padding(horizontal = 12.dp),
-                text = "Awesome quotes from or community",
+                text = AppStrings.DESCRIPTION_HOME,
                 style = MaterialTheme.typography.Medium14.copy(color = Color.Gray),
             )
         }
 
         item {
-            BannerSlider(BannerData.getBanners())
+            HomeBannerSlider()
         }
 
         item {
             HomeSectionHeader(
-                startText = "Latest Quotes", endText = "View All", onNavigate = {
+                startText = AppStrings.SEC_HEADER_LATEST_QUOTES_HOME,
+                endText = AppStrings.END_TEXT_VIEW_ALL_HOME,
+                onNavigate = {
                     onNavigateToExplore("All")
                 })
         }
@@ -71,8 +72,11 @@ fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
         }
 
         item {
+
             HomeSectionHeader(
-                startText = "Categories", endText = "View All", onNavigate = {
+                startText = AppStrings.SEC_HEADER_CATEGORIES_HOME,
+                endText = AppStrings.END_TEXT_VIEW_ALL_HOME,
+                onNavigate = {
                     onNavigateToExplore("All")
                 })
         }
@@ -87,8 +91,7 @@ fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
             ) {
                 items(categories.size) { index ->
                     HomeQuotesCategory(
-                        quoteCategory = categories[index],
-                        onNavigateToExplore = { selectedCategory ->
+                        quoteCategory = categories[index], onNavigateToExplore = { selectedCategory ->
                             onNavigateToExplore(selectedCategory)
                         })
                 }
@@ -97,7 +100,9 @@ fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
 
         item {
             HomeSectionHeader(
-                startText = "Trending Quotes", endText = "View All", onNavigate = {
+                startText = AppStrings.SEC_HEADER_TRENDING_QUOTES_HOME,
+                endText = AppStrings.END_TEXT_VIEW_ALL_HOME,
+                onNavigate = {
                     onNavigateToExplore("All")
                 })
         }

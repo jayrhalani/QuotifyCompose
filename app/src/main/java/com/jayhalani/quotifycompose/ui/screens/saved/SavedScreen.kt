@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.jayhalani.quotifycompose.ui.theme.AppStrings
 import com.jayhalani.quotifycompose.ui.theme.Bold20
 
 @Composable
@@ -19,6 +20,6 @@ fun SavedScreen() {
             .background(color = Color.Green.copy(alpha = 0.5f)),
         contentAlignment = Alignment.Center
     ) {
-        Text("Saved Screen", style = MaterialTheme.typography.Bold20, color = Color.White)
+        Text(AppStrings.TITLE_SAVED, style = MaterialTheme.typography.Bold20, color = Color.White)
     }
 }

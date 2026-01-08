@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.jayhalani.quotifycompose.data.QuoteModel
 import com.jayhalani.quotifycompose.ui.components.ColumnSpacerWeight1f
 import com.jayhalani.quotifycompose.ui.components.RowSpacerWeight1f
+import com.jayhalani.quotifycompose.ui.theme.AppStrings
 import com.jayhalani.quotifycompose.ui.theme.Medium16
 import com.jayhalani.quotifycompose.ui.theme.Normal12
 
@@ -55,12 +56,12 @@ fun HomeQuotesCard(modifier: Modifier = Modifier, quoteModel: QuoteModel) {
                 HomeQuotesCardAvatar()
                 RowSpacerWeight1f()
                 Icon(
-                    Icons.Default.Share, contentDescription = "ic_share", tint = Color.White
+                    Icons.Default.Share, contentDescription = AppStrings.CD_SHARE_QUOTE, tint = Color.White
                 )
                 Spacer(Modifier.width(8.dp))
                 Icon(
                     Icons.Default.FavoriteBorder,
-                    contentDescription = "ic_favorite",
+                    contentDescription = AppStrings.CD_FAVORITE_ACTIVE,
                     tint = Color.White,
                 )
             }
@@ -76,7 +77,7 @@ fun HomeQuotesCard(modifier: Modifier = Modifier, quoteModel: QuoteModel) {
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                text = "-${quoteModel.author}", style = MaterialTheme.typography.Normal12.copy(
+                    text = "-${quoteModel.author}", style = MaterialTheme.typography.Normal12.copy(
                     Color.White, lineHeight = 16.sp, fontStyle = FontStyle.Italic
                 ), modifier = Modifier.padding(4.dp)
             )

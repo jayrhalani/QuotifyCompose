@@ -57,7 +57,7 @@ fun HomeQuotesCategory(
             ) {
                 Icon(
                     imageVector = quoteCategory.icon,
-                    contentDescription = "Category Icon",
+                    contentDescription = quoteCategory.contentDescription,
                     modifier = Modifier
                         .size(44.dp)
                         .padding(8.dp),

@@ -36,11 +36,10 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.jayhalani.quotifycompose.data.QuoteCategoryModel
 import com.jayhalani.quotifycompose.data.QuoteModel
+import com.jayhalani.quotifycompose.ui.theme.AppColors
+import com.jayhalani.quotifycompose.ui.theme.AppStrings
 import com.jayhalani.quotifycompose.ui.theme.Bold12
 import com.jayhalani.quotifycompose.ui.theme.Bold16
-import com.jayhalani.quotifycompose.ui.theme.colorGreen
-import com.jayhalani.quotifycompose.ui.theme.colorPink
-import com.jayhalani.quotifycompose.ui.theme.colorSkyBlue
 
 @Composable
 fun ExploreQuotesCard(quote: QuoteModel, quoteCategoryModel: QuoteCategoryModel) {
@@ -81,24 +80,32 @@ fun ExploreQuotesCard(quote: QuoteModel, quoteCategoryModel: QuoteCategoryModel)
                     Spacer(Modifier.height(16.dp))
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         ExploreQuotesCardActionButton(
-                            icon = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                            contentDescription = "Favorite",
-                            iconTint = colorPink,
-                            circleColor = colorPink.copy(alpha = 0.5f),
+                            icon = if (isFavorite) {
+                                Icons.Default.Favorite
+                            } else {
+                                Icons.Default.FavoriteBorder
+                            },
+                            contentDescription = if (isFavorite) {
+                                AppStrings.CD_FAVORITE_INACTIVE
+                            } else {
+                                AppStrings.CD_FAVORITE_ACTIVE
+                            },
+                            iconTint = AppColors.CategoryLife,
+                            circleColor = AppColors.CategoryLife.copy(alpha = 0.2f),
                         ) {
                             isFavorite = !isFavorite
                         }
                         ExploreQuotesCardActionButton(
                             icon = Icons.Default.Download,
-                            contentDescription = "Download",
-                            iconTint = colorGreen,
-                            circleColor = colorGreen.copy(alpha = 0.5f),
+                            contentDescription = AppStrings.CD_DOWNLOAD_QUOTE,
+                            iconTint = AppColors.CategoryEducation,
+                            circleColor = AppColors.CategoryEducation.copy(alpha = 0.2f),
                         ) {}
                         ExploreQuotesCardActionButton(
                             icon = Icons.Default.Share,
-                            contentDescription = "Share",
-                            iconTint = colorSkyBlue,
-                            circleColor = colorSkyBlue.copy(alpha = 0.5f),
+                            contentDescription = AppStrings.CD_SHARE_QUOTE,
+                            iconTint = AppColors.CategoryHumor,
+                            circleColor = AppColors.CategoryHumor.copy(alpha = 0.2f),
                         ) {}
                     }
                 }
