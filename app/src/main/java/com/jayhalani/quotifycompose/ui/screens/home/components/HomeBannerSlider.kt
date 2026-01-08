@@ -1,4 +1,4 @@
-package com.jayhalani.quotifycompose.ui.components
+package com.jayhalani.quotifycompose.ui.screens.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
