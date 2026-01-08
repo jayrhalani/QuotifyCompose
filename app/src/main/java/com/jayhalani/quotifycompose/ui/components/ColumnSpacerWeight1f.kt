@@ -6,6 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun ColumnScope.SpacerWeight1f() {
+fun ColumnScope.ColumnSpacerWeight1f() {
     Spacer(modifier = Modifier.weight(1f))
 }

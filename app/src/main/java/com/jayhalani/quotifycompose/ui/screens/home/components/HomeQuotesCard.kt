@@ -26,7 +26,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jayhalani.quotifycompose.data.QuoteModel
-import com.jayhalani.quotifycompose.ui.components.SpacerWeight1f
+import com.jayhalani.quotifycompose.ui.components.ColumnSpacerWeight1f
+import com.jayhalani.quotifycompose.ui.components.RowSpacerWeight1f
 import com.jayhalani.quotifycompose.ui.theme.Medium16
 import com.jayhalani.quotifycompose.ui.theme.Normal12
 
@@ -52,7 +53,7 @@ fun HomeQuotesCard(modifier: Modifier = Modifier, quoteModel: QuoteModel) {
         ) {
             Row {
                 HomeQuotesCardAvatar()
-                SpacerWeight1f()
+                RowSpacerWeight1f()
                 Icon(
                     Icons.Default.Share, contentDescription = "ic_share", tint = Color.White
                 )
@@ -63,7 +64,7 @@ fun HomeQuotesCard(modifier: Modifier = Modifier, quoteModel: QuoteModel) {
                     tint = Color.White,
                 )
             }
-            SpacerWeight1f()
+            ColumnSpacerWeight1f()
             Text(
                 text = quoteModel.text,
                 maxLines = 5,
