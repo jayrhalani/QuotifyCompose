@@ -43,7 +43,7 @@ fun ExploreScreen(
                 name = "All",
                 category = QuoteCategory.ALL,
                 icon = Icons.Default.Dashboard,
-                color = Color(0xFF607D8B)
+                color = Color.Gray
             )
         ) + QuoteCategoryData.getCategories()
     }
