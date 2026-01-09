@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import com.jayhalani.quotifycompose.ui.theme.AppDimens
 import com.jayhalani.quotifycompose.ui.theme.Medium14
 
 @Composable
@@ -21,12 +21,12 @@ fun ExploreCategoryChip(
 ) {
     Surface(
         modifier = Modifier.clickable(onClick = onClick),
-        shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, if (isSelected) Color.Transparent else Color.Black),
+        shape = RoundedCornerShape(AppDimens.cornerRadiusMedium),
+        border = BorderStroke(AppDimens.borderStroke, if (isSelected) Color.Transparent else Color.Black),
         color = if (isSelected) chipColor else Color.White
     ) {
         Row(
-            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+            modifier = Modifier.padding(horizontal = AppDimens.paddingMedium, vertical = AppDimens.paddingSmall),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(

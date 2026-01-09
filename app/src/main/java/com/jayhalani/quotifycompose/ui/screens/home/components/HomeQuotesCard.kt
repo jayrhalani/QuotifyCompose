@@ -23,11 +23,11 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jayhalani.quotifycompose.data.QuoteModel
 import com.jayhalani.quotifycompose.ui.components.ColumnSpacerWeight1f
 import com.jayhalani.quotifycompose.ui.components.RowSpacerWeight1f
+import com.jayhalani.quotifycompose.ui.theme.AppDimens
 import com.jayhalani.quotifycompose.ui.theme.AppStrings
 import com.jayhalani.quotifycompose.ui.theme.Medium16
 import com.jayhalani.quotifycompose.ui.theme.Normal12
@@ -36,9 +36,9 @@ import com.jayhalani.quotifycompose.ui.theme.Normal12
 fun HomeQuotesCard(modifier: Modifier = Modifier, quoteModel: QuoteModel) {
     Card(
         modifier = modifier
-            .width(200.dp)
-            .height(240.dp)
-            .clip(RoundedCornerShape(16.dp))
+            .width(AppDimens.widthHomeQuotesCard)
+            .height(AppDimens.heightHomeQuotesCard)
+            .clip(RoundedCornerShape(AppDimens.cornerRadiusMedium))
     ) {
         Column(
             modifier = Modifier
@@ -50,7 +50,7 @@ fun HomeQuotesCard(modifier: Modifier = Modifier, quoteModel: QuoteModel) {
                         ),
                     )
                 )
-                .padding(20.dp)
+                .padding(AppDimens.paddingMedium)
         ) {
             Row {
                 HomeQuotesCardAvatar()
@@ -58,7 +58,7 @@ fun HomeQuotesCard(modifier: Modifier = Modifier, quoteModel: QuoteModel) {
                 Icon(
                     Icons.Default.Share, contentDescription = AppStrings.CD_SHARE_QUOTE, tint = Color.White
                 )
-                Spacer(Modifier.width(8.dp))
+                Spacer(Modifier.width(AppDimens.widthSmall))
                 Icon(
                     Icons.Default.FavoriteBorder,
                     contentDescription = AppStrings.CD_FAVORITE_ACTIVE,
@@ -75,11 +75,11 @@ fun HomeQuotesCard(modifier: Modifier = Modifier, quoteModel: QuoteModel) {
                     lineHeight = 20.sp,
                 ),
             )
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(AppDimens.heightSmall))
             Text(
-                    text = "-${quoteModel.author}", style = MaterialTheme.typography.Normal12.copy(
+                text = "-${quoteModel.author}", style = MaterialTheme.typography.Normal12.copy(
                     Color.White, lineHeight = 16.sp, fontStyle = FontStyle.Italic
-                ), modifier = Modifier.padding(4.dp)
+                ), modifier = Modifier.padding(AppDimens.paddingExtraSmall)
             )
         }
     }

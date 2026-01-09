@@ -7,13 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import com.jayhalani.quotifycompose.ui.theme.AppDimens
 
 @Composable
 fun HomeQuotesCardAvatar(modifier: Modifier = Modifier) {
     Surface(
         modifier = modifier
-            .size(32.dp)
+            .size(AppDimens.iconSizeLarge)
             .clip(CircleShape), color = Color.White.copy(alpha = 0.5f)
     ) {}
 }

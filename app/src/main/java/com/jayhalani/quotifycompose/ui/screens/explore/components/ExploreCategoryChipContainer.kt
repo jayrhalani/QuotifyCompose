@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.dp
 import com.jayhalani.quotifycompose.data.QuoteCategoryModel
+import com.jayhalani.quotifycompose.ui.theme.AppDimens
 
 @Composable
 fun ExploreCategoryChipContainer(
@@ -14,7 +14,8 @@ fun ExploreCategoryChipContainer(
     onCategoryClick: (QuoteCategoryModel) -> Unit
 ) {
     LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(8.dp), contentPadding = PaddingValues(horizontal = 16.dp)
+        horizontalArrangement = Arrangement.spacedBy(AppDimens.paddingSmall),
+        contentPadding = PaddingValues(horizontal = AppDimens.paddingMedium)
     ) {
         items(categories.size) { index ->
             val category = categories[index]

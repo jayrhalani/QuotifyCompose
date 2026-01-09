@@ -12,14 +12,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import com.jayhalani.quotifycompose.ui.theme.AppDimens
 import com.jayhalani.quotifycompose.ui.theme.Bold24
 
 @Composable
 fun ExploreQuotesCardAvatar(modifier: Modifier = Modifier, avatar: String, circleColor: Color) {
     Surface(
         modifier = modifier
-            .size(48.dp)
+            .size(AppDimens.iconSizeExtraLarge)
             .clip(CircleShape),
         color = circleColor.copy(alpha = 0.2f),
     ) {

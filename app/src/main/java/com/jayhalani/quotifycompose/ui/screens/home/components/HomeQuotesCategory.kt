@@ -22,8 +22,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import com.jayhalani.quotifycompose.data.QuoteCategoryModel
+import com.jayhalani.quotifycompose.ui.theme.AppDimens
 import com.jayhalani.quotifycompose.ui.theme.Medium12
 
 @Composable
@@ -34,24 +34,24 @@ fun HomeQuotesCategory(
 ) {
     Card(
         modifier = modifier
-            .width(100.dp)
-            .clip(RoundedCornerShape(16.dp))
+            .width(AppDimens.homeQuoteCategoriesWidth)
+            .clip(RoundedCornerShape(AppDimens.cornerRadiusMedium))
             .clickable {
                 onNavigateToExplore(quoteCategory.category.name)
             },
         colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        elevation = CardDefaults.cardElevation(AppDimens.elevationExtraSmall)
     ) {
         Column(
             modifier = modifier
                 .fillMaxWidth()
                 .background(color = quoteCategory.color.copy(alpha = 0.2f))
-                .padding(16.dp),
+                .padding(AppDimens.paddingMedium),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
             Surface(
-                modifier = modifier.size(44.dp),
+                modifier = modifier.size(AppDimens.iconSizeExtraLarge),
                 shape = CircleShape,
                 color = quoteCategory.color.copy(alpha = 0.5f)
             ) {
@@ -59,12 +59,12 @@ fun HomeQuotesCategory(
                     imageVector = quoteCategory.icon,
                     contentDescription = quoteCategory.contentDescription,
                     modifier = Modifier
-                        .size(44.dp)
-                        .padding(8.dp),
+                        .size(AppDimens.iconSizeExtraLarge)
+                        .padding(AppDimens.paddingSmall),
                     tint = quoteCategory.color
                 )
             }
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(AppDimens.heightMedium))
             Text(
                 text = quoteCategory.name, style = MaterialTheme.typography.Medium12
             )

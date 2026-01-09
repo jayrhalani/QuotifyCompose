@@ -23,9 +23,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.jayhalani.quotifycompose.data.BannerData
+import com.jayhalani.quotifycompose.ui.theme.AppDimens
 import com.jayhalani.quotifycompose.ui.theme.AppStrings
 
 @Preview(showBackground = true)
@@ -45,9 +45,9 @@ fun HomeBannerSlider() {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 12.dp)
-                    .clip(RoundedCornerShape(16.dp))
-                    .height(250.dp),
+                    .padding(horizontal = AppDimens.paddingMedium)
+                    .clip(RoundedCornerShape(AppDimens.cornerRadiusMedium))
+                    .height(AppDimens.heightBanner),
             ) {
                 AsyncImage(
                     model = bannerList[page].url,
@@ -57,7 +57,7 @@ fun HomeBannerSlider() {
                 )
             }
         }
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(AppDimens.heightSmall))
         Row {
             repeat(pageState.pageCount) { index ->
                 val color = if (pageState.currentPage == index) {
@@ -67,8 +67,8 @@ fun HomeBannerSlider() {
                 }
                 Box(
                     modifier = Modifier
-                        .padding(4.dp)
-                        .size(12.dp)
+                        .padding(AppDimens.paddingExtraSmall)
+                        .size(AppDimens.homeBannerCounterSize)
                         .background(color, shape = CircleShape)
                 ) {}
             }

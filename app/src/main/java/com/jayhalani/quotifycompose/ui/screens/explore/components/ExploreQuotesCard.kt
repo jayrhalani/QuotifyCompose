@@ -33,10 +33,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.unit.dp
 import com.jayhalani.quotifycompose.data.QuoteCategoryModel
 import com.jayhalani.quotifycompose.data.QuoteModel
 import com.jayhalani.quotifycompose.ui.theme.AppColors
+import com.jayhalani.quotifycompose.ui.theme.AppDimens
 import com.jayhalani.quotifycompose.ui.theme.AppStrings
 import com.jayhalani.quotifycompose.ui.theme.Bold12
 import com.jayhalani.quotifycompose.ui.theme.Bold16
@@ -47,14 +47,14 @@ fun ExploreQuotesCard(quote: QuoteModel, quoteCategoryModel: QuoteCategoryModel)
     var isFavorite by remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
-            .padding(start = 8.dp, end = 8.dp)
+            .padding(horizontal = AppDimens.paddingSmall)
             .fillMaxWidth(),
-        border = BorderStroke(1.dp, color = Color.Gray),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+        border = BorderStroke(AppDimens.borderStroke, color = Color.Gray),
+        elevation = CardDefaults.cardElevation(defaultElevation = AppDimens.elevationSmall)
     ) {
         Box(
             modifier = Modifier
-                .clip(RoundedCornerShape(16.dp))
+                .clip(RoundedCornerShape(AppDimens.cornerRadiusMedium))
                 .clickable {
                     showDetails = !showDetails
                 }) {
@@ -62,23 +62,23 @@ fun ExploreQuotesCard(quote: QuoteModel, quoteCategoryModel: QuoteCategoryModel)
                 modifier = Modifier
                     .fillMaxSize()
                     .background(color = Color.White.copy(alpha = 0.2f))
-                    .border(1.dp, color = Color.Gray)
-                    .padding(all = 20.dp)
+                    .border(AppDimens.borderStroke, color = Color.Gray)
+                    .padding(all = AppDimens.paddingMedium)
             ) {
                 ExploreQuotesCardHeader(quote = quote, quoteCategoryModel = quoteCategoryModel)
-                Spacer(Modifier.height(24.dp))
+                Spacer(Modifier.height(AppDimens.heightLarge))
                 Text(quote.text, style = MaterialTheme.typography.Bold16)
-                Spacer(Modifier.height(16.dp))
+                Spacer(Modifier.height(AppDimens.heightMedium))
                 Text(
                     quote.author, style = MaterialTheme.typography.Bold12.copy(
                         fontStyle = FontStyle.Italic, color = quoteCategoryModel.color
                     )
                 )
                 if (showDetails) {
-                    Spacer(Modifier.height(16.dp))
+                    Spacer(Modifier.height(AppDimens.heightMedium))
                     HorizontalDivider(color = Color.Gray)
-                    Spacer(Modifier.height(16.dp))
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Spacer(Modifier.height(AppDimens.heightMedium))
+                    Row(horizontalArrangement = Arrangement.spacedBy(AppDimens.paddingSmall)) {
                         ExploreQuotesCardActionButton(
                             icon = if (isFavorite) {
                                 Icons.Default.Favorite

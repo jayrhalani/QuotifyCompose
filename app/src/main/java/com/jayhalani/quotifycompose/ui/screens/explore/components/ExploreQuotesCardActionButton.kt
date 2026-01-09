@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.unit.dp
+import com.jayhalani.quotifycompose.ui.theme.AppDimens
 
 @Composable
 fun ExploreQuotesCardActionButton(
@@ -21,7 +21,7 @@ fun ExploreQuotesCardActionButton(
 ) {
     Surface(
         modifier = Modifier
-            .size(56.dp)
+            .size(AppDimens.iconSizeExtraLarge)
             .clip(CircleShape)
             .clickable(onClick = onClick),
         color = circleColor,

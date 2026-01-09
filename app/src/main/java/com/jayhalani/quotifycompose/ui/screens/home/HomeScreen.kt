@@ -13,13 +13,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import com.jayhalani.quotifycompose.data.QuoteCategoryData
 import com.jayhalani.quotifycompose.data.QuoteData
 import com.jayhalani.quotifycompose.ui.screens.home.components.HomeBannerSlider
 import com.jayhalani.quotifycompose.ui.screens.home.components.HomeQuotesCard
 import com.jayhalani.quotifycompose.ui.screens.home.components.HomeQuotesCategory
 import com.jayhalani.quotifycompose.ui.screens.home.components.HomeSectionHeader
+import com.jayhalani.quotifycompose.ui.theme.AppDimens
 import com.jayhalani.quotifycompose.ui.theme.AppStrings
 import com.jayhalani.quotifycompose.ui.theme.Bold24
 import com.jayhalani.quotifycompose.ui.theme.Medium14
@@ -28,17 +28,19 @@ import com.jayhalani.quotifycompose.ui.theme.Medium14
 fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
 
     LazyColumn(
-        modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.spacedBy(12.dp)
+        modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.spacedBy(AppDimens.paddingMedium)
     ) {
         item {
-            Spacer(modifier = Modifier.padding(top = 12.dp))
+            Spacer(modifier = Modifier.padding(top = AppDimens.paddingMedium))
             Text(
-                modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 4.dp),
+                modifier = Modifier.padding(
+                    start = AppDimens.paddingMedium, end = AppDimens.paddingMedium, bottom = AppDimens.paddingSmall
+                ),
                 text = AppStrings.TITLE_HOME,
                 style = MaterialTheme.typography.Bold24,
             )
             Text(
-                modifier = Modifier.padding(horizontal = 12.dp),
+                modifier = Modifier.padding(horizontal = AppDimens.paddingMedium),
                 text = AppStrings.DESCRIPTION_HOME,
                 style = MaterialTheme.typography.Medium14.copy(color = Color.Gray),
             )
@@ -63,7 +65,8 @@ fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
             }
 
             LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(12.dp), contentPadding = PaddingValues(horizontal = 16.dp)
+                horizontalArrangement = Arrangement.spacedBy(AppDimens.paddingMedium),
+                contentPadding = PaddingValues(horizontal = AppDimens.paddingMedium)
             ) {
                 items(randomQuotes.size) { index ->
                     HomeQuotesCard(quoteModel = randomQuotes[index])
@@ -87,7 +90,8 @@ fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
             }
 
             LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(12.dp), contentPadding = PaddingValues(horizontal = 16.dp)
+                horizontalArrangement = Arrangement.spacedBy(AppDimens.paddingMedium),
+                contentPadding = PaddingValues(horizontal = AppDimens.paddingMedium)
             ) {
                 items(categories.size) { index ->
                     HomeQuotesCategory(
@@ -113,7 +117,8 @@ fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
             }
 
             LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(12.dp), contentPadding = PaddingValues(horizontal = 16.dp)
+                horizontalArrangement = Arrangement.spacedBy(AppDimens.paddingMedium),
+                contentPadding = PaddingValues(horizontal = AppDimens.paddingMedium)
             ) {
                 items(randomQuotes.size) { index ->
                     HomeQuotesCard(quoteModel = randomQuotes[index])
