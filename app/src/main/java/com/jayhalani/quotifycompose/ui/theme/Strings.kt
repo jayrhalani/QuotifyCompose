@@ -12,14 +12,25 @@ object AppStrings {
     const val ROUTE_HOME = "home"
     const val ROUTE_EXPLORE = "explore"
     const val ROUTE_SAVED = "saved"
-    const val ROUTE_QUOTES = "quotes"
+    const val ROUTE_CATEGORY_QUOTES = "category_quotes"
+
+    // ----------------------------------------
+    // Navigation Parameters
+    // ----------------------------------------
+    const val PARAM_CATEGORY = "category"
+    const val PARAM_SHOW_BACK_BUTTON = "showBackButton"
+
+    // ----------------------------------------
+    // Navigation Templates
+    // ----------------------------------------
+    const val ROUTE_CATEGORY_QUOTES_WITH_PARAMS = "$ROUTE_CATEGORY_QUOTES/{$PARAM_CATEGORY}"
 
     // ----------------------------------------
     // Screen Titles
     // ----------------------------------------
     const val TITLE_HOME = APP_NAME
     const val TITLE_SAVED = "Your Favorites"
-    const val TITLE_CATEGORIES = "Categories"
+    const val TITLE_EXPLORE = "Explore"
 
     // ----------------------------------------
     // Home Screen Specific

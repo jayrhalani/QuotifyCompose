@@ -7,59 +7,56 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.jayhalani.quotifycompose.ui.screens.category.CategoryQuotesScreen
 import com.jayhalani.quotifycompose.ui.screens.explore.ExploreScreen
 import com.jayhalani.quotifycompose.ui.screens.home.HomeScreen
-import com.jayhalani.quotifycompose.ui.screens.quote.QuoteScreen
+import com.jayhalani.quotifycompose.ui.navigation.BottomNavigationItems
 import com.jayhalani.quotifycompose.ui.screens.saved.SavedScreen
+import com.jayhalani.quotifycompose.ui.theme.AppStrings
 
 @Composable
 fun AppNavGraph(modifier: Modifier, navController: NavHostController) {
 
-    NavHost(modifier = modifier, navController = navController, startDestination = QuoteScreen.Home.route) {
+    NavHost(
+        modifier = modifier,
+        navController = navController,
+        startDestination = BottomNavigationItems.Home.route
+    ) {
 
-        composable(route = QuoteScreen.Home.route) {
+        composable(route = BottomNavigationItems.Home.route) {
             HomeScreen(
                 onNavigateToExplore = { category ->
-                    navController.navigate("${QuoteScreen.Explore.route}/$category?showBackButton=true")
+                    val route = if (category != null) {
+                        "${AppStrings.ROUTE_CATEGORY_QUOTES}/$category"
+                    } else {
+                        BottomNavigationItems.Explore.route
+                    }
+                    navController.navigate(route)
                 },
             )
         }
 
-        // This is the route for the bottom navigation item
-        composable(route = QuoteScreen.Explore.route) {
-            ExploreScreen(
-                initialSelectedCategory = "All",
-                showBackButton = false,
-                onBack = { navController.popBackStack() }
-            )
+        composable(route = BottomNavigationItems.Explore.route) {
+            ExploreScreen()
         }
 
-        // This is the route for navigating from HomeScreen
         composable(
-            route = "${QuoteScreen.Explore.route}/{category}?showBackButton={showBackButton}",
+            route = AppStrings.ROUTE_CATEGORY_QUOTES_WITH_PARAMS,
             arguments = listOf(
-                navArgument("category") {
+                navArgument(AppStrings.PARAM_CATEGORY) {
                     type = NavType.StringType
-                    nullable = true
-                },
-                // Add a new argument to control the back button
-                navArgument("showBackButton") {
-                    type = NavType.BoolType
-                    defaultValue = true
                 }
             )
         ) { backstackEntry ->
-            val category = backstackEntry.arguments?.getString("category")
-            val showBackButton = backstackEntry.arguments?.getBoolean("showBackButton") ?: true
+            val category = backstackEntry.arguments?.getString(AppStrings.PARAM_CATEGORY) ?: AppStrings.CATEGORY_ALL
 
-            ExploreScreen(
-                initialSelectedCategory = category,
-                showBackButton = showBackButton,
+            CategoryQuotesScreen(
+                categoryName = category,
                 onBack = { navController.popBackStack() }
             )
         }
 
-        composable(route = QuoteScreen.Saved.route) {
+        composable(route = BottomNavigationItems.Saved.route) {
             SavedScreen()
         }
     }
