@@ -13,8 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.jayhalani.quotifycompose.data.QuoteCategoryData
-import com.jayhalani.quotifycompose.data.QuoteData
+import com.jayhalani.quotifycompose.data.getQuoteCategories
+import com.jayhalani.quotifycompose.data.getQuoteList
 import com.jayhalani.quotifycompose.ui.screens.home.components.HomeBannerSlider
 import com.jayhalani.quotifycompose.ui.screens.home.components.HomeQuotesCard
 import com.jayhalani.quotifycompose.ui.screens.home.components.HomeQuotesCategory
@@ -61,7 +61,7 @@ fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
 
         item {
             val randomQuotes = remember {
-                QuoteData.getQuotes().shuffled().take(10)
+                getQuoteList().shuffled().take(10)
             }
 
             LazyRow(
@@ -86,7 +86,7 @@ fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
 
         item {
             val categories = remember {
-                QuoteCategoryData.getCategories()
+                getQuoteCategories()
             }
 
             LazyRow(
@@ -113,7 +113,7 @@ fun HomeScreen(onNavigateToExplore: (category: String?) -> Unit) {
 
         item {
             val randomQuotes = remember {
-                QuoteData.getQuotes().shuffled().take(10)
+                getQuoteList().shuffled().take(10)
             }
 
             LazyRow(

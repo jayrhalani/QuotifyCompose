@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import coil3.compose.AsyncImage
-import com.jayhalani.quotifycompose.data.BannerData
+import com.jayhalani.quotifycompose.data.getBannerList
 import com.jayhalani.quotifycompose.ui.theme.AppDimens
 import com.jayhalani.quotifycompose.ui.theme.AppStrings
 
@@ -33,7 +33,7 @@ import com.jayhalani.quotifycompose.ui.theme.AppStrings
 fun HomeBannerSlider() {
 
     val bannerList = remember {
-        BannerData.getBanners()
+        getBannerList()
     }
 
     val pageState = rememberPagerState(initialPage = 0, pageCount = { bannerList.size })

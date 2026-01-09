@@ -24,9 +24,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.jayhalani.quotifycompose.data.QuoteCategory
-import com.jayhalani.quotifycompose.data.QuoteCategoryData
 import com.jayhalani.quotifycompose.data.QuoteCategoryModel
-import com.jayhalani.quotifycompose.data.QuoteData
+import com.jayhalani.quotifycompose.data.getQuoteCategories
+import com.jayhalani.quotifycompose.data.getQuoteList
 import com.jayhalani.quotifycompose.ui.screens.explore.components.ExploreCategoryChipContainer
 import com.jayhalani.quotifycompose.ui.screens.explore.components.ExploreQuotesCard
 import com.jayhalani.quotifycompose.ui.theme.AppDimens
@@ -47,12 +47,12 @@ fun ExploreScreen(
                 color = Color.Gray,
                 contentDescription = AppStrings.CD_CAT_ALL
             )
-        ) + QuoteCategoryData.getCategories()
+        ) + getQuoteCategories()
     }
     var selectedCategoryModel by remember {
         mutableStateOf(categoryList.find { it.category.name == initialSelectedCategory } ?: categoryList.first())
     }
-    val quoteList = remember { QuoteData.getQuotes() }
+    val quoteList = remember { getQuoteList() }
     val filteredQuotes = remember(selectedCategoryModel) {
         if (selectedCategoryModel.category == QuoteCategory.ALL) {
             quoteList
