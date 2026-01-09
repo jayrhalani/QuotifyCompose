@@ -1,5 +1,6 @@
 package com.jayhalani.quotifycompose.ui.screens.explore
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,24 +10,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Dashboard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import com.jayhalani.quotifycompose.data.QuoteCategory
-import com.jayhalani.quotifycompose.data.QuoteCategoryModel
-import com.jayhalani.quotifycompose.data.getQuoteCategories
-import com.jayhalani.quotifycompose.data.getQuoteList
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.jayhalani.quotifycompose.ui.screens.explore.components.ExploreCategoryChipContainer
 import com.jayhalani.quotifycompose.ui.screens.explore.components.ExploreQuotesCard
 import com.jayhalani.quotifycompose.ui.theme.AppDimens
@@ -35,30 +31,17 @@ import com.jayhalani.quotifycompose.ui.theme.Bold24
 
 @Composable
 fun ExploreScreen(
-    initialSelectedCategory: String?, showBackButton: Boolean, onBack: () -> Unit
+    initialSelectedCategory: String?,
+    showBackButton: Boolean,
+    onBack: () -> Unit,
+    viewModel: ExploreViewModel = viewModel()
 ) {
-    val categoryList = remember {
-        listOf(
-            QuoteCategoryModel(
-                id = 0,
-                name = AppStrings.CATEGORY_ALL,
-                category = QuoteCategory.ALL,
-                icon = Icons.Default.Dashboard,
-                color = Color.Gray,
-                contentDescription = AppStrings.CD_CAT_ALL
-            )
-        ) + getQuoteCategories()
-    }
-    var selectedCategoryModel by remember {
-        mutableStateOf(categoryList.find { it.category.name == initialSelectedCategory } ?: categoryList.first())
-    }
-    val quoteList = remember { getQuoteList() }
-    val filteredQuotes = remember(selectedCategoryModel) {
-        if (selectedCategoryModel.category == QuoteCategory.ALL) {
-            quoteList
-        } else {
-            quoteList.filter { it.category == selectedCategoryModel.category }
-        }
+    val categories by viewModel.categories.collectAsState()
+    val selectedCategoryModel by viewModel.selectedCategoryModel.collectAsState()
+    val filteredQuotes by viewModel.filteredQuotesState.collectAsState()
+
+    LaunchedEffect(initialSelectedCategory) {
+        viewModel.setInitialCategory(initialSelectedCategory)
     }
 
     Column(
@@ -91,15 +74,24 @@ fun ExploreScreen(
             modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.spacedBy(AppDimens.paddingMedium)
         ) {
             item {
-                ExploreCategoryChipContainer(
-                    categories = categoryList, selectedCategory = selectedCategoryModel
-                ) { newCategory ->
-                    selectedCategoryModel = newCategory
+                selectedCategoryModel?.let { selected ->
+                    ExploreCategoryChipContainer(
+                        categories = categories,
+                        selectedCategory = selected
+                    ) { newCategory ->
+                        viewModel.selectCategory(newCategory)
+                    }
                 }
             }
 
-            items(filteredQuotes.size) {
-                ExploreQuotesCard(filteredQuotes[it], selectedCategoryModel)
+            items(filteredQuotes) { quote ->
+                Log.d("ExploreScreen", "Current Category: ${quote.category}")
+                val categoryModel = viewModel.getCategoryModel(quote.category)
+                ExploreQuotesCard(
+                    quote = quote,
+                    categoryName = categoryModel.name,
+                    categoryColor = categoryModel.color
+                )
             }
         }
     }

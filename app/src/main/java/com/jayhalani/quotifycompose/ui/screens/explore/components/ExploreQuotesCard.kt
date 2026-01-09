@@ -33,7 +33,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
-import com.jayhalani.quotifycompose.data.QuoteCategoryModel
 import com.jayhalani.quotifycompose.data.QuoteModel
 import com.jayhalani.quotifycompose.ui.theme.AppColors
 import com.jayhalani.quotifycompose.ui.theme.AppDimens
@@ -42,9 +41,14 @@ import com.jayhalani.quotifycompose.ui.theme.Bold12
 import com.jayhalani.quotifycompose.ui.theme.Bold16
 
 @Composable
-fun ExploreQuotesCard(quote: QuoteModel, quoteCategoryModel: QuoteCategoryModel) {
+fun ExploreQuotesCard(
+    quote: QuoteModel,
+    categoryName: String,
+    categoryColor: Color
+) {
     var showDetails by remember { mutableStateOf(false) }
     var isFavorite by remember { mutableStateOf(false) }
+
     Card(
         modifier = Modifier
             .padding(horizontal = AppDimens.paddingSmall)
@@ -65,13 +69,17 @@ fun ExploreQuotesCard(quote: QuoteModel, quoteCategoryModel: QuoteCategoryModel)
                     .border(AppDimens.borderStroke, color = Color.Gray)
                     .padding(all = AppDimens.paddingMedium)
             ) {
-                ExploreQuotesCardHeader(quote = quote, quoteCategoryModel = quoteCategoryModel)
+                ExploreQuotesCardHeader(
+                    quote = quote,
+                    categoryName = categoryName,
+                    categoryColor = categoryColor
+                )
                 Spacer(Modifier.height(AppDimens.heightLarge))
                 Text(quote.text, style = MaterialTheme.typography.Bold16)
                 Spacer(Modifier.height(AppDimens.heightMedium))
                 Text(
                     quote.author, style = MaterialTheme.typography.Bold12.copy(
-                        fontStyle = FontStyle.Italic, color = quoteCategoryModel.color
+                        fontStyle = FontStyle.Italic, color = categoryColor
                     )
                 )
                 if (showDetails) {
@@ -80,16 +88,8 @@ fun ExploreQuotesCard(quote: QuoteModel, quoteCategoryModel: QuoteCategoryModel)
                     Spacer(Modifier.height(AppDimens.heightMedium))
                     Row(horizontalArrangement = Arrangement.spacedBy(AppDimens.paddingSmall)) {
                         ExploreQuotesCardActionButton(
-                            icon = if (isFavorite) {
-                                Icons.Default.Favorite
-                            } else {
-                                Icons.Default.FavoriteBorder
-                            },
-                            contentDescription = if (isFavorite) {
-                                AppStrings.CD_FAVORITE_INACTIVE
-                            } else {
-                                AppStrings.CD_FAVORITE_ACTIVE
-                            },
+                            icon = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                            contentDescription = if (isFavorite) AppStrings.CD_FAVORITE_INACTIVE else AppStrings.CD_FAVORITE_ACTIVE,
                             iconTint = AppColors.CategoryLife,
                             circleColor = AppColors.CategoryLife.copy(alpha = 0.2f),
                         ) {
@@ -111,6 +111,5 @@ fun ExploreQuotesCard(quote: QuoteModel, quoteCategoryModel: QuoteCategoryModel)
                 }
             }
         }
-
     }
 }

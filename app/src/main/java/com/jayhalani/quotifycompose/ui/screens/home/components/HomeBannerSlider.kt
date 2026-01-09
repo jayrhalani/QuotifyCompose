@@ -16,25 +16,18 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
 import coil3.compose.AsyncImage
-import com.jayhalani.quotifycompose.data.getBannerList
+import com.jayhalani.quotifycompose.data.BannerModel
 import com.jayhalani.quotifycompose.ui.theme.AppDimens
 import com.jayhalani.quotifycompose.ui.theme.AppStrings
 
-@Preview(showBackground = true)
 @Composable
-fun HomeBannerSlider() {
-
-    val bannerList = remember {
-        getBannerList()
-    }
+fun HomeBannerSlider(bannerList: List<BannerModel>) {
 
     val pageState = rememberPagerState(initialPage = 0, pageCount = { bannerList.size })
 

@@ -4,19 +4,19 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import com.jayhalani.quotifycompose.data.QuoteCategoryModel
+import androidx.compose.ui.graphics.Color
 import com.jayhalani.quotifycompose.data.QuoteModel
 import com.jayhalani.quotifycompose.ui.components.RowSpacerWeight1f
 import com.jayhalani.quotifycompose.ui.theme.Bold14
 
 @Composable
-fun ExploreQuotesCardHeader(quote: QuoteModel, quoteCategoryModel: QuoteCategoryModel) {
+fun ExploreQuotesCardHeader(quote: QuoteModel, categoryName: String, categoryColor: Color) {
     Row {
-        ExploreQuotesCardAvatar(avatar = quote.avatar, circleColor = quoteCategoryModel.color)
+        ExploreQuotesCardAvatar(avatar = quote.avatar, circleColor = categoryColor)
         RowSpacerWeight1f()
         Text(
-            quoteCategoryModel.name,
-            style = MaterialTheme.typography.Bold14.copy(color = quoteCategoryModel.color)
+            categoryName,
+            style = MaterialTheme.typography.Bold14.copy(color = categoryColor)
         )
     }
 }
