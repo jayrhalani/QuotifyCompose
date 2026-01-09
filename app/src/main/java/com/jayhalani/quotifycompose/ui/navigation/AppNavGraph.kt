@@ -10,7 +10,6 @@ import androidx.navigation.navArgument
 import com.jayhalani.quotifycompose.ui.screens.category.CategoryQuotesScreen
 import com.jayhalani.quotifycompose.ui.screens.explore.ExploreScreen
 import com.jayhalani.quotifycompose.ui.screens.home.HomeScreen
-import com.jayhalani.quotifycompose.ui.navigation.BottomNavigationItems
 import com.jayhalani.quotifycompose.ui.screens.saved.SavedScreen
 import com.jayhalani.quotifycompose.ui.theme.AppStrings
 
