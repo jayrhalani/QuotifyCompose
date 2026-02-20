@@ -12,6 +12,7 @@ object AppStrings {
     const val ROUTE_HOME = "home"
     const val ROUTE_EXPLORE = "explore"
     const val ROUTE_SAVED = "saved"
+    const val ROUTE_QUOTE_OF_THE_DAY = "quote_of_the_day"
     const val ROUTE_CATEGORY_QUOTES = "category_quotes"
 
     // ----------------------------------------
@@ -31,6 +32,7 @@ object AppStrings {
     const val TITLE_HOME = APP_NAME
     const val TITLE_SAVED = "Your Favorites"
     const val TITLE_EXPLORE = "Explore"
+    const val TITLE_QUOTE_OF_THE_DAY = "Quote of the Day"
 
     // ----------------------------------------
     // Home Screen Specific

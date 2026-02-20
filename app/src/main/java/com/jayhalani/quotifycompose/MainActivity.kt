@@ -29,6 +29,7 @@ class MainActivity : ComponentActivity() {
             val bottomNavItems = listOf(
                 BottomNavigationItems.Home,
                 BottomNavigationItems.Explore,
+                BottomNavigationItems.QuoteOfDay,
                 BottomNavigationItems.Saved,
             )
 

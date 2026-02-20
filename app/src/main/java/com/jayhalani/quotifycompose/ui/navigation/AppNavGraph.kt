@@ -10,6 +10,7 @@ import androidx.navigation.navArgument
 import com.jayhalani.quotifycompose.ui.screens.category.CategoryQuotesScreen
 import com.jayhalani.quotifycompose.ui.screens.explore.ExploreScreen
 import com.jayhalani.quotifycompose.ui.screens.home.HomeScreen
+import com.jayhalani.quotifycompose.ui.screens.quote_of_the_day.QuoteOfDayScreen
 import com.jayhalani.quotifycompose.ui.screens.saved.SavedScreen
 import com.jayhalani.quotifycompose.ui.theme.AppStrings
 
@@ -57,6 +58,10 @@ fun AppNavGraph(modifier: Modifier, navController: NavHostController) {
 
         composable(route = BottomNavigationItems.Saved.route) {
             SavedScreen()
+        }
+
+        composable(route = BottomNavigationItems.QuoteOfDay.route) {
+            QuoteOfDayScreen()
         }
     }
 }

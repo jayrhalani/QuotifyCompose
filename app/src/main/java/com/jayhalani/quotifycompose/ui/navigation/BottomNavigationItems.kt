@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Explore
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.jayhalani.quotifycompose.ui.theme.AppStrings
 
@@ -29,5 +30,11 @@ sealed class BottomNavigationItems(
         route = AppStrings.ROUTE_SAVED,
         title = "Saved",
         icon = Icons.Default.Favorite
+    )
+
+    data object QuoteOfDay : BottomNavigationItems(
+        route = AppStrings.ROUTE_QUOTE_OF_THE_DAY,
+        title = "Today",
+        icon = Icons.Default.Star
     )
 }
